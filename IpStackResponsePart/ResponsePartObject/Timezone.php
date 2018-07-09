@@ -3,6 +3,11 @@
 namespace mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartObject;
 
 
+use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartValue\ValueBool;
+use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartValue\ValueInt;
+use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartValue\ValueString;
+use mvedie\Libs\IpStacker\Response;
+
 abstract class Timezone extends \mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartObject {
 
     /** @var string The ID of the time zone associated with the IP. (e.g. America/Los_Angeles for PST) */
@@ -19,6 +24,19 @@ abstract class Timezone extends \mvedie\Libs\IpStacker\IpStackResponsePart\Respo
 
     protected function construct($valueOrSubResonsePart) {
         $this->load(['id', 'current_time', 'gmt_offset', 'code', 'is_daylight_saving',], $valueOrSubResonsePart);
+    }
+
+
+    public static function get(Response $Response, $propertie_a) {
+        return (new static($Response))->construct(
+            [
+                'id'                 => ValueString::extractValue($Response, 'time_zone.id'),
+                'current_time'       => ValueString::extractValue($Response, 'time_zone.current_time'),
+                'gmt_offset'         => ValueInt::extractValue($Response, 'time_zone.gmt_offset'),
+                'code'               => ValueString::extractValue($Response, 'time_zone.code'),
+                'is_daylight_saving' => ValueBool::extractValue($Response, 'time_zone.is_daylight_saving'),
+            ]
+        );
     }
 
 }

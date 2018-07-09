@@ -2,7 +2,22 @@
 
 namespace mvedie\Libs\IpStacker;
 
+use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartNotAsked;
+use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartNotLoaded;
+use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartObject\Connection;
+use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartObject\Currency;
+use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartObject\Location;
+use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartObject\Security;
+use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartObject\Timezone;
+use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartValue\ValueFloat;
+use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartValue\ValueString;
+
 class Response {
+
+    /** @var \mvedie\Libs\IpStacker\Request */
+    protected $_Request;
+    /** @var array */
+    protected $_response_json;
 
     /** @var string the requested IP address. */
     protected $_ip;
@@ -41,8 +56,46 @@ class Response {
     /** @var \mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartObject\Security an object containing security-related data. */
     protected $_security;
 
+    public function __construct(Request $Request, array $response_json) {
+        $this->_Request       = $Request;
+        $this->_response_json = $response_json;
+    }
+
+    /**
+     * @return \mvedie\Libs\IpStacker\Request
+     */
+    public function Request(): \mvedie\Libs\IpStacker\Request {
+        return $this->_Request;
+    }
+
+    /**
+     * @return array
+     */
+    public function responseJson(): array {
+        return $this->_response_json;
+    }
 
 
+    protected function parse() {
+        $this->_ip             = ValueString::extractValue($this, 'ip');
+        $this->_hostname       = ValueString::extractValue($this, 'hostname');
+        $this->_type           = ValueString::extractValue($this, 'type');
+        $this->_continent_code = ValueString::extractValue($this, 'continent_code');
+        $this->_continent_name = ValueString::extractValue($this, 'continent_name');
+        $this->_country_code   = ValueString::extractValue($this, 'country_code');
+        $this->_country_name   = ValueString::extractValue($this, 'country_name');
+        $this->_region_code    = ValueString::extractValue($this, 'region_code');
+        $this->_region_name    = ValueString::extractValue($this, 'region_name');
+        $this->_city           = ValueString::extractValue($this, 'city');
+        $this->_zip            = ValueString::extractValue($this, 'zip');
+        $this->_latitude       = ValueFloat::extractValue($this, 'latitude');
+        $this->_longitude      = ValueFloat::extractValue($this, 'longitude');
+        $this->_location       = Location::extractValue($this, 'location');
+        $this->_time_zone      = Timezone::extractValue($this, 'time_zone');
+        $this->_currency       = Currency::extractValue($this, 'currency');
+        $this->_connection     = Connection::extractValue($this, 'connection');
+        $this->_security       = Security::extractValue($this, 'security');
+    }
 
 
 }

@@ -10,7 +10,7 @@ namespace mvedie\Libs\IpStacker;
  *
  * @see     https://ipstack.com/documentation#errors
  */
-abstract class IpStackerException extends \Exception {
+class IpStackerException extends \Exception {
 
 
     /**

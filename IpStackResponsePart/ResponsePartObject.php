@@ -2,7 +2,8 @@
 
 namespace mvedie\Libs\IpStacker\IpStackResponsePart;
 
-use mvedie\Libs\IpStacker\IpStackerResponse;
+
+use mvedie\Libs\IpStacker\Response;
 
 abstract class ResponsePartObject extends ResponsePart {
 
@@ -24,5 +25,6 @@ abstract class ResponsePartObject extends ResponsePart {
     final public function isLoaded(): bool {
         return true;
     }
+
 
 }

@@ -3,6 +3,11 @@
 namespace mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartObject;
 
 
+use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartValue\ValueArray;
+use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartValue\ValueBool;
+use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartValue\ValueString;
+use mvedie\Libs\IpStacker\Response;
+
 abstract class Security extends \mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartObject {
 
     /** @var bool True or false depending on whether or not the given IP is associated with a proxy. */
@@ -42,6 +47,22 @@ abstract class Security extends \mvedie\Libs\IpStacker\IpStackResponsePart\Respo
 
     protected function construct($valueOrSubResonsePart) {
         $this->load(['is_proxy', 'proxy_type', 'is_crawler', 'crawler_name', 'crawler_type', 'is_tor', 'threat_level', 'threat_types',], $valueOrSubResonsePart);
+    }
+
+
+    public static function get(Response $Response, $propertie_a) {
+        return (new static($Response))->construct(
+            [
+                'is_proxy'     => ValueBool::extractValue($Response, 'security.is_proxy'),
+                'proxy_type'   => ValueString::extractValue($Response, 'security.proxy_type'),
+                'is_crawler'   => ValueBool::extractValue($Response, 'security.is_crawler'),
+                'crawler_name' => ValueString::extractValue($Response, 'security.crawler_name'),
+                'crawler_type' => ValueString::extractValue($Response, 'security.crawler_type'),
+                'is_tor'       => ValueBool::extractValue($Response, 'security.is_tor'),
+                'threat_level' => ValueString::extractValue($Response, 'security.threat_level'),
+                'threat_types' => ValueArray::extractValue($Response, 'security.threat_types'),
+            ]
+        );
     }
 
 }

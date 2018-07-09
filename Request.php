@@ -52,6 +52,15 @@ class Request {
     }
 
     /**
+     * @return array
+     */
+    public function Field_a(): array {
+        return $this->_field_a;
+    }
+
+
+
+    /**
      * @param mixed $language
      * Supported languages:
      *
@@ -113,8 +122,26 @@ class Request {
 
         $endpoint .= '?'.http_build_query($query_parameters);
 
-        var_dump(file_get_contents($endpoint));
+        $response_text = file_get_contents($endpoint);
+        $response_json = json_decode($response_text, true);
+
+        if (array_key_exists('success', $response_json) && false === $response_json['success']) {
+            throw new IpStackerException($response_json['error']['code'], $response_json['error']['type'], $response_json['error']['info']);
+        }
+
+        // to treat always like multiple query result
+        if (!isset($response_json[0])) {
+            $response_json[0] = $response_json;
+        }
+
+        foreach ($response_json as $response) {
+            $this->parse($response);
+        }
+
         return $this;
     }
+
+
+
 
 }

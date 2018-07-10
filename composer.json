@@ -17,8 +17,8 @@
     "psr-4": {
       "Zmog\\Libs\\IpStacker\\": "",
       "Zmog\\Libs\\IpStacker\\IpStackResponsePart\\": "IpStackResponsePart/",
-      "Zmog\\Libs\\IpStacker\\IpStackResponsePart\\ResponsePartValue": "IpStackResponsePart/ResponsePartValue/",
-      "Zmog\\Libs\\IpStacker\\IpStackResponsePart\\ResponsePartObject": "IpStackResponsePart/ResponsePartObject/"
+      "Zmog\\Libs\\IpStacker\\IpStackResponsePart\\ResponsePartValue\\": "IpStackResponsePart/ResponsePartValue/",
+      "Zmog\\Libs\\IpStacker\\IpStackResponsePart\\ResponsePartObject\\": "IpStackResponsePart/ResponsePartObject/"
     }
   }
 }

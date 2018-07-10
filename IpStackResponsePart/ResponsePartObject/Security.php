@@ -1,18 +1,18 @@
 <?php
 
-namespace mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartObject;
+namespace Zmog\Libs\IpStacker\IpStackResponsePart\ResponsePartObject;
 
 
-use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePart;
-use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartValue\ValueArray;
-use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartValue\ValueBool;
-use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartValue\ValueString;
-use mvedie\Libs\IpStacker\Response;
+use Zmog\Libs\IpStacker\IpStackResponsePart\ResponsePart;
+use Zmog\Libs\IpStacker\IpStackResponsePart\ResponsePartValue\ValueArray;
+use Zmog\Libs\IpStacker\IpStackResponsePart\ResponsePartValue\ValueBool;
+use Zmog\Libs\IpStacker\IpStackResponsePart\ResponsePartValue\ValueString;
+use Zmog\Libs\IpStacker\Response;
 
 /**
  * Class Security
  *
- * @package mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartObject
+ * @package Zmog\Libs\IpStacker\IpStackResponsePart\ResponsePartObject
  *
  * @method bool is_proxy($notFoundValue = 'Optionnal')
  * @method string proxy_type($notFoundValue = 'Optionnal')
@@ -23,7 +23,7 @@ use mvedie\Libs\IpStacker\Response;
  * @method string threat_level($notFoundValue = 'Optionnal')
  * @method string threat_types($notFoundValue = 'Optionnal')
  */
-class Security extends \mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartObject {
+class Security extends \Zmog\Libs\IpStacker\IpStackResponsePart\ResponsePartObject {
 
     /** @var bool True or false depending on whether or not the given IP is associated with a proxy. */
     protected $_is_proxy;

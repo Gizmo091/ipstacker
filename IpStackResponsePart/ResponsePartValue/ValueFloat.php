@@ -1,11 +1,11 @@
 <?php
 
-namespace mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartValue;
+namespace Zmog\Libs\IpStacker\IpStackResponsePart\ResponsePartValue;
 
 
-use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePart;
+use Zmog\Libs\IpStacker\IpStackResponsePart\ResponsePart;
 
-class ValueFloat extends \mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartValue {
+class ValueFloat extends \Zmog\Libs\IpStacker\IpStackResponsePart\ResponsePartValue {
 
     protected function construct($valueOrSubResonsePart):ResponsePart {
         return parent::construct($valueOrSubResonsePart === null ? $valueOrSubResonsePart : (float)$valueOrSubResonsePart);

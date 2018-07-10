@@ -8,7 +8,7 @@ Ip Stack Api Call Wrapper
 ## Basic Usage :
 
 ```php 
-$Response = (new \mvedie\Libs\IpStacker\Request('<your_access_key>', '<ip_address>'))->Response();
+$Response = (new \Zmog\Libs\IpStacker\Request('<your_access_key>', '<ip_address>'))->Response();
 
 $country_code = $Response->country_code(); /* Throw an exception if country_code is not present in response */
 $country_code = $Response->country_code('US'); /* Use 'US' as default value if country_code is not present in response (no exception are thrown */
@@ -22,11 +22,11 @@ $ip_a = [
     '1.1.1.1',
     ];
 
-$Request = new \mvedie\Libs\IpStacker\Request('<your_access_key>', ...$ip_a);
+$Request = new \Zmog\Libs\IpStacker\Request('<your_access_key>', ...$ip_a);
 $Request->onlyLocation();
 $Request->addCurrency();
 /* Or chained method
-$Request = (new \mvedie\Libs\IpStacker\Request('<your_access_key>', ...$ip_a))->onlyLocation()->addCurrency();
+$Request = (new \Zmog\Libs\IpStacker\Request('<your_access_key>', ...$ip_a))->onlyLocation()->addCurrency();
 */
 
 /* Result of first ip : */

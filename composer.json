@@ -1,5 +1,5 @@
 {
-  "name": "mvedie/ipstacker",
+  "name": "Zmog/ipstacker",
   "description": "Ip Stack Api Call Wrapper",
   "authors": [
     {
@@ -15,8 +15,8 @@
   },
   "autoload": {
     "psr-4": {
-      "mvedie\\Libs\\IpStacker": "",
-      "mvedie\\Libs\\IpStacker\\IpStackResponsePart": "IpStackResponsePart/"
+      "Zmog\\Libs\\IpStacker": "",
+      "Zmog\\Libs\\IpStacker\\IpStackResponsePart": "IpStackResponsePart/"
     }
   }
 }

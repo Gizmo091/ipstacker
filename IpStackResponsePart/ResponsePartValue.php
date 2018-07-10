@@ -1,9 +1,9 @@
 <?php
 
-namespace mvedie\Libs\IpStacker\IpStackResponsePart;
+namespace Zmog\Libs\IpStacker\IpStackResponsePart;
 
 
-use mvedie\Libs\IpStacker\Response;
+use Zmog\Libs\IpStacker\Response;
 
 abstract class ResponsePartValue extends ResponsePart {
 

@@ -11,6 +11,6 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
-    "mvedie/ipstacker": "master-dev"
+    "Zmog/ipstacker": "master-dev"
   }
 }

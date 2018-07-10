@@ -1,23 +1,23 @@
 <?php
 
-namespace mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartObject;
+namespace Zmog\Libs\IpStacker\IpStackResponsePart\ResponsePartObject;
 
 
-use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePart;
-use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartValue\ValueArray;
-use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartValue\ValueBool;
-use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartValue\ValueInt;
-use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartValue\ValueString;
-use mvedie\Libs\IpStacker\Response;
+use Zmog\Libs\IpStacker\IpStackResponsePart\ResponsePart;
+use Zmog\Libs\IpStacker\IpStackResponsePart\ResponsePartValue\ValueArray;
+use Zmog\Libs\IpStacker\IpStackResponsePart\ResponsePartValue\ValueBool;
+use Zmog\Libs\IpStacker\IpStackResponsePart\ResponsePartValue\ValueInt;
+use Zmog\Libs\IpStacker\IpStackResponsePart\ResponsePartValue\ValueString;
+use Zmog\Libs\IpStacker\Response;
 
 /**
  * Class Location
  *
- * @package mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartObject
+ * @package Zmog\Libs\IpStacker\IpStackResponsePart\ResponsePartObject
  *
  * @method int geoname_id($notFoundValue = 'Optionnal')
  * @method string capital($notFoundValue = 'Optionnal')
- * @method \mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartObject\Language[] languages($notFoundValue = 'Optionnal')
+ * @method \Zmog\Libs\IpStacker\IpStackResponsePart\ResponsePartObject\Language[] languages($notFoundValue = 'Optionnal')
  * @method string country_flag($notFoundValue = 'Optionnal')
  * @method string country_flag_emoji($notFoundValue = 'Optionnal')
  * @method string country_flag_emoji_unicode($notFoundValue = 'Optionnal')
@@ -25,13 +25,13 @@ use mvedie\Libs\IpStacker\Response;
  * @method bool is_eu($notFoundValue = 'Optionnal')
  *
  */
-class Location extends \mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartObject {
+class Location extends \Zmog\Libs\IpStacker\IpStackResponsePart\ResponsePartObject {
 
     /** @var int The unique geoname identifier in accordance with the Geonames Registry. */
     protected $_geoname_id;
     /** @var string The capital city of the country associated with the IP. */
     protected $_capital;
-    /** @var \mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartObject\Language[] An object containing one or multiple sub-objects per language spoken in the country associated with the IP. */
+    /** @var \Zmog\Libs\IpStacker\IpStackResponsePart\ResponsePartObject\Language[] An object containing one or multiple sub-objects per language spoken in the country associated with the IP. */
     protected $_languages;
     /** @var string Tn HTTP URL leading to an SVG-flag icon for the country associated with the IP. */
     protected $_country_flag;

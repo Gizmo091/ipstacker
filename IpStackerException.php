@@ -1,12 +1,12 @@
 <?php
 
-namespace mvedie\Libs\IpStacker;
+namespace Zmog\Libs\IpStacker;
 
 
 /**
  * Class IpStackerException
  *
- * @package mvedie\Libs\IpStacker
+ * @package Zmog\Libs\IpStacker
  *
  * @see     https://ipstack.com/documentation#errors
  */

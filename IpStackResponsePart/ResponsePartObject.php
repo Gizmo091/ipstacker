@@ -1,10 +1,10 @@
 <?php
 
-namespace mvedie\Libs\IpStacker\IpStackResponsePart;
+namespace Zmog\Libs\IpStacker\IpStackResponsePart;
 
 
-use mvedie\Libs\IpStacker\IpStackerExceptionNotFound;
-use mvedie\Libs\IpStacker\Response;
+use Zmog\Libs\IpStacker\IpStackerExceptionNotFound;
+use Zmog\Libs\IpStacker\Response;
 
 abstract class ResponsePartObject extends ResponsePart {
 
@@ -56,7 +56,7 @@ abstract class ResponsePartObject extends ResponsePart {
             };
         }
 
-        /** @var \mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePart $val */
+        /** @var \Zmog\Libs\IpStacker\IpStackResponsePart\ResponsePart $val */
         $val       = $this->{"_$property"};
         $val_class = get_class($val);
         if (ResponsePartNotLoaded::class === $val_class) {
@@ -70,7 +70,7 @@ abstract class ResponsePartObject extends ResponsePart {
             return $val;
         }
         else {
-            /** @var \mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartValue $val */
+            /** @var \Zmog\Libs\IpStacker\IpStackResponsePart\ResponsePartValue $val */
             return $val->value();
         }
     }

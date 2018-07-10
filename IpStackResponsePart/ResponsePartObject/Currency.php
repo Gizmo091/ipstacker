@@ -1,16 +1,16 @@
 <?php
 
-namespace mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartObject;
+namespace Zmog\Libs\IpStacker\IpStackResponsePart\ResponsePartObject;
 
 
-use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePart;
-use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartValue\ValueString;
-use mvedie\Libs\IpStacker\Response;
+use Zmog\Libs\IpStacker\IpStackResponsePart\ResponsePart;
+use Zmog\Libs\IpStacker\IpStackResponsePart\ResponsePartValue\ValueString;
+use Zmog\Libs\IpStacker\Response;
 
 /**
  * Class Currency
  *
- * @package mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartObject
+ * @package Zmog\Libs\IpStacker\IpStackResponsePart\ResponsePartObject
  *
  * @method string code($notFoundValue = 'Optionnal')
  * @method string name($notFoundValue = 'Optionnal')
@@ -18,7 +18,7 @@ use mvedie\Libs\IpStacker\Response;
  * @method string symbol($notFoundValue = 'Optionnal')
  * @method string symbol_native($notFoundValue = 'Optionnal')
  */
-class Currency extends \mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartObject {
+class Currency extends \Zmog\Libs\IpStacker\IpStackResponsePart\ResponsePartObject {
 
     /** @vqr string The 3-letter code of the main currency associated with the IP. */
     protected $_code;

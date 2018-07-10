@@ -1,12 +1,12 @@
 <?php
 
-namespace mvedie\Libs\IpStacker;
+namespace Zmog\Libs\IpStacker;
 
 
 /**
  * Class IpStackerExceptionNotFound
  *
- * @package mvedie\Libs\IpStacker
+ * @package Zmog\Libs\IpStacker
  *
  */
 class IpStackerExceptionNotFound extends \Exception {

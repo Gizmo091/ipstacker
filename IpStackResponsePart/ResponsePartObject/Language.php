@@ -1,22 +1,22 @@
 <?php
 
-namespace mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartObject;
+namespace Zmog\Libs\IpStacker\IpStackResponsePart\ResponsePartObject;
 
 
-use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePart;
-use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartValue\ValueString;
-use mvedie\Libs\IpStacker\Response;
+use Zmog\Libs\IpStacker\IpStackResponsePart\ResponsePart;
+use Zmog\Libs\IpStacker\IpStackResponsePart\ResponsePartValue\ValueString;
+use Zmog\Libs\IpStacker\Response;
 
 /**
  * Class Language
  *
- * @package mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartObject
+ * @package Zmog\Libs\IpStacker\IpStackResponsePart\ResponsePartObject
  *
  * @method string code($notFoundValue = 'Optionnal')
  * @method string name($notFoundValue = 'Optionnal')
  * @method string native($notFoundValue = 'Optionnal')
  */
-class Language extends \mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartObject {
+class Language extends \Zmog\Libs\IpStacker\IpStackResponsePart\ResponsePartObject {
 
     protected static $current_key = null;
 

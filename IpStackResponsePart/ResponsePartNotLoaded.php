@@ -1,9 +1,9 @@
 <?php
 
-namespace mvedie\Libs\IpStacker\IpStackResponsePart;
+namespace Zmog\Libs\IpStacker\IpStackResponsePart;
 
 use http\Env\Response;
-use mvedie\Libs\IpStacker\IpStackerResponse;
+use Zmog\Libs\IpStacker\IpStackerResponse;
 
 class ResponsePartNotLoaded extends ResponsePart {
 
@@ -13,7 +13,7 @@ class ResponsePartNotLoaded extends ResponsePart {
         return false;
     }
 
-    public static function get(\mvedie\Libs\IpStacker\Response $Response, $propertie_a = null) {
+    public static function get(\Zmog\Libs\IpStacker\Response $Response, $propertie_a = null) {
         return new static($Response);
     }
 }

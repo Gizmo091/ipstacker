@@ -1,6 +1,6 @@
 <?php
 
-namespace mvedie\Libs\IpStacker;
+namespace Zmog\Libs\IpStacker;
 
 class Request {
 
@@ -13,7 +13,7 @@ class Request {
     protected $_output;
 
     /**
-     * @var \mvedie\Libs\IpStacker\Response[]
+     * @var \Zmog\Libs\IpStacker\Response[]
      */
     protected $_Response_a;
 
@@ -99,7 +99,7 @@ class Request {
      * ru - Russian
      * zh - Chinese
      *
-     * @return \mvedie\Libs\IpStacker\Request
+     * @return \Zmog\Libs\IpStacker\Request
      * @throws \Exception
      */
     public function setLanguage($language): Request {
@@ -113,7 +113,7 @@ class Request {
     /**
      * @param string $output
      *
-     * @return \mvedie\Libs\IpStacker\Request
+     * @return \Zmog\Libs\IpStacker\Request
      * @throws \Exception
      */
     public function setOutput(string $output): Request {
@@ -132,8 +132,8 @@ class Request {
     /**
      * @param string|null $ip_address
      *
-     * @return \mvedie\Libs\IpStacker\Response
-     * @throws \mvedie\Libs\IpStacker\IpStackerExceptionNotFound
+     * @return \Zmog\Libs\IpStacker\Response
+     * @throws \Zmog\Libs\IpStacker\IpStackerExceptionNotFound
      * @throws \Exception
      */
     public function Response(string $ip_address = null): Response {
@@ -156,7 +156,7 @@ class Request {
 
 
     /**
-     * @return \mvedie\Libs\IpStacker\Request
+     * @return \Zmog\Libs\IpStacker\Request
      * @throws \Exception
      */
     public function run(): Request {

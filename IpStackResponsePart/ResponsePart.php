@@ -1,9 +1,9 @@
 <?php
 
-namespace mvedie\Libs\IpStacker\IpStackResponsePart;
+namespace Zmog\Libs\IpStacker\IpStackResponsePart;
 
-use mvedie\Libs\IpStacker\Request;
-use mvedie\Libs\IpStacker\Response;
+use Zmog\Libs\IpStacker\Request;
+use Zmog\Libs\IpStacker\Response;
 
 abstract class ResponsePart {
 
@@ -18,7 +18,7 @@ abstract class ResponsePart {
 
 
     /**
-     * @return \mvedie\Libs\IpStacker\Response
+     * @return \Zmog\Libs\IpStacker\Response
      */
     public function Response(): Response {
         return $this->_Response;

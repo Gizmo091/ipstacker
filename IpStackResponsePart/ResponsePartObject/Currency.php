@@ -3,13 +3,25 @@
 namespace mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartObject;
 
 
+use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePart;
 use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartValue\ValueString;
 use mvedie\Libs\IpStacker\Response;
 
-abstract class Currency extends \mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartObject {
+/**
+ * Class Currency
+ *
+ * @package mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartObject
+ *
+ * @method string code($notFoundValue = 'Optionnal')
+ * @method string name($notFoundValue = 'Optionnal')
+ * @method string plural($notFoundValue = 'Optionnal')
+ * @method string symbol($notFoundValue = 'Optionnal')
+ * @method string symbol_native($notFoundValue = 'Optionnal')
+ */
+class Currency extends \mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartObject {
 
     /** @vqr string The 3-letter code of the main currency associated with the IP. */
-    protected $_currency;
+    protected $_code;
     /** @var string The name of the given currency. */
     protected $_name;
     /** @var string The plural name of the given currency. */
@@ -20,14 +32,14 @@ abstract class Currency extends \mvedie\Libs\IpStacker\IpStackResponsePart\Respo
     protected $_symbol_native;
 
 
-    protected function construct($valueOrSubResonsePart) {
-        $this->load(['currency', 'name', 'plural', 'symbol', 'symbol_native',], $valueOrSubResonsePart);
+    protected function construct($valueOrSubResonsePart): ResponsePart {
+        return $this->load(['code', 'name', 'plural', 'symbol', 'symbol_native',], $valueOrSubResonsePart);
     }
 
     public static function get(Response $Response, $propertie_a) {
         return (new static($Response))->construct(
             [
-                'currency'      => ValueString::extractValue($Response, 'currency.currency'),
+                'code'          => ValueString::extractValue($Response, 'currency.code'),
                 'name'          => ValueString::extractValue($Response, 'currency.name'),
                 'plural'        => ValueString::extractValue($Response, 'currency.plural'),
                 'symbol'        => ValueString::extractValue($Response, 'currency.symbol'),

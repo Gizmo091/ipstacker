@@ -12,6 +12,30 @@ use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartObject\Timezone;
 use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartValue\ValueFloat;
 use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartValue\ValueString;
 
+/**
+ * Class Response
+ *
+ * @package mvedie\Libs\IpStacker
+ *
+ * @method string ip($notFoundValue = 'Optionnal')
+ * @method string|null hostnaname($notFoundValue = 'Optionnal')
+ * @method string type($notFoundValue = 'Optionnal')
+ * @method string continent_code($notFoundValue = 'Optionnal')
+ * @method string continent_name($notFoundValue = 'Optionnal')
+ * @method string country_code($notFoundValue = 'Optionnal')
+ * @method string country_name($notFoundValue = 'Optionnal')
+ * @method string region_code($notFoundValue = 'Optionnal')
+ * @method string region_name($notFoundValue = 'Optionnal')
+ * @method string city($notFoundValue = 'Optionnal')
+ * @method string zip($notFoundValue = 'Optionnal')
+ * @method float latitude($notFoundValue = 'Optionnal')
+ * @method float longitude($notFoundValue = 'Optionnal')
+ * @method Location location()
+ * @method Timezone time_zone()
+ * @method Currency currency()
+ * @method Connection connection()
+ * @method Security security()
+ */
 class Response {
 
     /** @var \mvedie\Libs\IpStacker\Request */
@@ -59,6 +83,49 @@ class Response {
     public function __construct(Request $Request, array $response_json) {
         $this->_Request       = $Request;
         $this->_response_json = $response_json;
+        $this->parse();
+    }
+
+
+    public function __call($name, $arguments_a) {
+        if (property_exists($this, "_$name")) {
+            array_unshift($arguments_a, $name);
+            return call_user_func_array([$this, 'getProperty'], $arguments_a);
+            //return $this->getProperty($name, $arguments_a[0]);
+        }
+    }
+
+
+    protected function getProperty(string $property) {
+        if (1 === func_num_args()) {
+            $notFoundValue = function() {
+                throw new IpStackerExceptionNotFound();
+            };
+        }
+        else {
+            $value = func_get_arg(1);
+
+            $notFoundValue = function() use ($value) {
+                return $value;
+            };
+        }
+
+        /** @var \mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePart $val */
+        $val       = $this->{"_$property"};
+        $val_class = get_class($val);
+        if (ResponsePartNotLoaded::class === $val_class) {
+            return $notFoundValue();
+        }
+        if (ResponsePartNotAsked::class === $val_class) {
+            return $notFoundValue();
+        }
+        if ($val::isObject()) {
+            return $val;
+        }
+        else {
+            /** @var \mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartValue $val */
+            return $val->value();
+        }
     }
 
     /**
@@ -77,9 +144,9 @@ class Response {
 
 
     protected function parse() {
-        $this->_ip             = ValueString::extractValue($this, 'ip');
-        $this->_hostname       = ValueString::extractValue($this, 'hostname');
-        $this->_type           = ValueString::extractValue($this, 'type');
+        $this->_ip = ValueString::extractValue($this, 'ip');
+        $this->_hostname = ValueString::extractValue($this, 'hostname');
+        $this->_type = ValueString::extractValue($this, 'type');
         $this->_continent_code = ValueString::extractValue($this, 'continent_code');
         $this->_continent_name = ValueString::extractValue($this, 'continent_name');
         $this->_country_code   = ValueString::extractValue($this, 'country_code');

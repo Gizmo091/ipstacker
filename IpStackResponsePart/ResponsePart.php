@@ -13,26 +13,30 @@ abstract class ResponsePart {
         $this->_Response = $Response;
     }
 
-    abstract protected function construct($valueOrSubResonsePart) ;
+
+    abstract protected function construct($valueOrSubResonsePart): ResponsePart;
 
 
     /**
      * @return \mvedie\Libs\IpStacker\Response
      */
-    public function Response():Response {
+    public function Response(): Response {
         return $this->_Response;
     }
 
 
+    abstract public static function get(Response $Response, $propertie_a);
 
-    abstract public static function get(Response $Response, $propertie_a) ;
+    public static function isObject(): bool {
+        return false;
+    }
 
 
-    abstract public function isLoaded():bool;
+    abstract public function isLoaded(): bool;
 
     public static function extractValue(Response $Response, string $key) {
         $key_a = explode('.', $key);
-        if (!empty($$Response->Request()->Field_a())) {
+        if (!empty($Response->Request()->Field_a())) {
             $key_total = null;
             do {
                 foreach ($key_a as $key_part) {
@@ -44,16 +48,26 @@ abstract class ResponsePart {
                         break 2;
                     }
                 }
-
-                return ResponsePartNotAsked::get($Response, null);
+                if (!static::isObject()) {
+                    return ResponsePartNotAsked::get($Response);
+                }
+                else {
+                    return static::get($Response,[]);
+                }
             } while (true === false);
         }
 
         $value = null;
+
         foreach ($key_a as $key_part) {
             $key_part = is_numeric($key_part) ? (int)$key_part : $key_part;
             if (!array_key_exists($key_part, $value ?? $Response->responseJson())) {
-                return ResponsePartNotLoaded::get($Response, null);
+                if (!static::isObject()) {
+                    return ResponsePartNotLoaded::get($Response);
+                }
+                else {
+                    return static::get($Response,[]);
+                }
             }
             $value = ($value ?? $Response->responseJson())[$key_part];
         }

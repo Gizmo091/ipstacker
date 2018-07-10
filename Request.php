@@ -12,6 +12,11 @@ class Request {
     protected $_language;
     protected $_output;
 
+    /**
+     * @var \mvedie\Libs\IpStacker\Response[]
+     */
+    protected $_Response_a;
+
 
     /**
      * Request constructor.
@@ -27,6 +32,7 @@ class Request {
         $this->_field_a      = [];
         $this->setOutput('json');
         $this->setLanguage('en');
+        $this->_Response_a = null;
     }
 
 
@@ -34,7 +40,6 @@ class Request {
         $this->_ip_address_a = array_unique(array_merge($this->_ip_address_a, $ip_address));
         return $this;
     }
-
 
     /**
      * @param string ...$field
@@ -51,13 +56,34 @@ class Request {
         return $this;
     }
 
+
+    public function onlyLocation(): Request { return $this->setFields('location'); }
+
+    public function onlyTimezone(): Request { return $this->setFields('time_zone'); }
+
+    public function onlyCurrency(): Request { return $this->setFields('currency'); }
+
+    public function onlyConnection(): Request { return $this->setFields('connection'); }
+
+    public function onlySecurity(): Request { return $this->setFields('security'); }
+
+    public function addLocation(): Request { return $this->addFields('location'); }
+
+    public function addTimezone(): Request { return $this->addFields('time_zone'); }
+
+    public function addCurrency(): Request { return $this->addFields('currency'); }
+
+    public function addConnection(): Request { return $this->addFields('connection'); }
+
+    public function addSecurity(): Request { return $this->addFields('security'); }
+
+
     /**
      * @return array
      */
     public function Field_a(): array {
         return $this->_field_a;
     }
-
 
 
     /**
@@ -99,6 +125,36 @@ class Request {
     }
 
 
+    protected function addResponse(Response $Response) {
+        $this->_Response_a[$Response->ip()] = $Response;
+    }
+
+    /**
+     * @param string|null $ip_address
+     *
+     * @return \mvedie\Libs\IpStacker\Response
+     * @throws \mvedie\Libs\IpStacker\IpStackerExceptionNotFound
+     * @throws \Exception
+     */
+    public function Response(string $ip_address = null): Response {
+        if ($this->_Response_a === null) {
+            $this->run();
+        }
+
+        if (empty($this->_Response_a)) {
+            throw new IpStackerExceptionNotFound("No result for this request");
+        }
+
+        $ip_address = $ip_address ?? array_keys($this->_Response_a)[0];
+
+        if (!isset($this->_Response_a[$ip_address])) {
+            throw new IpStackerExceptionNotFound("No result found for this ip : $ip_address");
+        }
+
+        return $this->_Response_a[$ip_address];
+    }
+
+
     /**
      * @return \mvedie\Libs\IpStacker\Request
      * @throws \Exception
@@ -107,6 +163,9 @@ class Request {
         if (empty($this->_ip_address_a)) {
             throw new \Exception('No ip given to Request');
         }
+        $this->addFields('ip'); // ip field si required to store result
+
+        $this->_Response_a = [];
 
         $endpoint = static::API_END_POINT.implode(',', $this->_ip_address_a);
 
@@ -131,17 +190,17 @@ class Request {
 
         // to treat always like multiple query result
         if (!isset($response_json[0])) {
-            $response_json[0] = $response_json;
+            $response_json = [$response_json];
         }
 
+        //var_dump($response_json);
+
         foreach ($response_json as $response) {
-            $this->parse($response);
+            $this->addResponse(new Response($this, $response));
         }
 
         return $this;
     }
-
-
 
 
 }

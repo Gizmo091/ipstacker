@@ -3,10 +3,13 @@
 namespace mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartValue;
 
 
-abstract class ValueFloat extends \mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartValue {
+use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePart;
 
-    protected function construct($valueOrSubResonsePart) {
-        $this->_value = (float)$valueOrSubResonsePart;
+class ValueFloat extends \mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartValue {
+
+    protected function construct($valueOrSubResonsePart):ResponsePart {
+        return parent::construct($valueOrSubResonsePart === null ? $valueOrSubResonsePart : (float)$valueOrSubResonsePart);
+
     }
 
 }

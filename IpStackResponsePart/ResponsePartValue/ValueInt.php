@@ -3,10 +3,11 @@
 namespace mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartValue;
 
 
-abstract class ValueInt extends \mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartValue {
+use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePart;
 
-    protected function construct($valueOrSubResonsePart) {
-        $this->_value = (int)$valueOrSubResonsePart;
+class ValueInt extends \mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartValue {
+
+    protected function construct($valueOrSubResonsePart):ResponsePart {
+        return parent::construct($valueOrSubResonsePart === null ? $valueOrSubResonsePart : (int)$valueOrSubResonsePart);
     }
-
 }

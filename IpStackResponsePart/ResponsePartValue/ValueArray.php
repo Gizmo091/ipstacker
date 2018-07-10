@@ -3,10 +3,12 @@
 namespace mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartValue;
 
 
-abstract class ValueArray extends \mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartValue {
+use mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePart;
 
-    protected function construct($valueOrSubResonsePart) {
-        $this->_value = (array)$valueOrSubResonsePart;
+class ValueArray extends \mvedie\Libs\IpStacker\IpStackResponsePart\ResponsePartValue {
+
+    protected function construct($valueOrSubResonsePart): ResponsePart {
+        return parent::construct($valueOrSubResonsePart === null ? $valueOrSubResonsePart : (array)$valueOrSubResonsePart);
     }
 
 }

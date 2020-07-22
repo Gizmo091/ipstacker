@@ -181,9 +181,22 @@ class Request {
 
         $endpoint .= '?'.http_build_query($query_parameters);
 
+
+// Initialize CURL:
+$ch = curl_init($endpoint);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+// Store the data:
+$response_text = curl_exec($ch);
+curl_close($ch);
+
+// Decode JSON response:
+$response_json = json_decode($response_text, true);
+
+        /*
         $response_text = file_get_contents($endpoint);
         $response_json = json_decode($response_text, true);
-
+*/
         if (array_key_exists('success', $response_json) && false === $response_json['success']) {
             throw new IpStackerException($response_json['error']['code'], $response_json['error']['type'], $response_json['error']['info']);
         }

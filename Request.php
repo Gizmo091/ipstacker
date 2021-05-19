@@ -11,6 +11,7 @@ class Request {
     protected $_field_a;
     protected $_language;
     protected $_output;
+    protected $_second_timeout = 2;
 
     /**
      * @var \Zmog\Libs\IpStacker\Response[]
@@ -33,6 +34,18 @@ class Request {
         $this->setOutput('json');
         $this->setLanguage('en');
         $this->_Response_a = null;
+    }
+
+    /**
+     * Set timeout to wait response
+     * @param int $second Timeout in second
+     */
+    public function setTimeout(int $second ) {
+        if ($second < 0) {
+            return $this;
+        }
+        $this->_second_timeout = $second;
+        return $this;
     }
 
 
@@ -103,7 +116,17 @@ class Request {
      * @throws \Exception
      */
     public function setLanguage($language): Request {
-        if (!in_array($language, ['en', 'de', 'es', 'fr', 'ja', 'pt-br', 'ru', 'zh'])) {
+        if (!in_array($language,
+                      [
+                          'en',
+                          'de',
+                          'es',
+                          'fr',
+                          'ja',
+                          'pt-br',
+                          'ru',
+                          'zh',
+                      ])) {
             throw new \Exception('Bad language value');
         }
         $this->_language = $language;
@@ -117,7 +140,11 @@ class Request {
      * @throws \Exception
      */
     public function setOutput(string $output): Request {
-        if (!in_array($output, ['json', 'xml'])) {
+        if (!in_array($output,
+                      [
+                          'json',
+                          'xml',
+                      ])) {
             throw new \Exception('Bad output value');
         }
         $this->_output = $output;
@@ -181,8 +208,27 @@ class Request {
 
         $endpoint .= '?'.http_build_query($query_parameters);
 
-        $response_text = file_get_contents($endpoint);
+
+        // Initialize CURL:
+        $ch = curl_init($endpoint);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // Add timeout option
+        if ($this->_second_timeout > 0) {
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->_second_timeout);
+        }
+
+        // Store the data:
+        $response_text = curl_exec($ch);
+        curl_close($ch);
+
+        // Decode JSON response:
         $response_json = json_decode($response_text, true);
+        if (null === $response_json) {
+            $response_json = array_map(function($ip) {
+                return ['ip' => $ip];
+            },
+                $this->_ip_address_a);
+        }
 
         if (array_key_exists('success', $response_json) && false === $response_json['success']) {
             throw new IpStackerException($response_json['error']['code'], $response_json['error']['type'], $response_json['error']['info']);
@@ -192,8 +238,6 @@ class Request {
         if (!isset($response_json[0])) {
             $response_json = [$response_json];
         }
-
-        //var_dump($response_json);
 
         foreach ($response_json as $response) {
             $this->addResponse(new Response($this, $response));
